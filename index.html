@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <title> Comment Post </title>
+
+    <script>
+
+
+        function validate() {
+            var name = document.getElementById("name");
+            var title = document.getElementById("title");
+            var comment = document.getElementById("comment");
+
+            var blank_field = false;
+            if (name.value == "") {
+                name.style.backgroundColor = "Pink";
+                blank_field = true;
+            } else {
+                name.style.backgroundColor = "White"
+            };
+
+
+            var text_color = document.getElementById("text_color");
+            var textColor = text_color.options[text_color.selectedIndex].value;
+
+            var bg_color = document.getElementById("bg_color");
+            var bgColor = bg_color.options[bg_color.selectedIndex].value;
+
+            if (textColor == "Choose A Color") {
+                text_color.style.border = "2px solid red";
+                blank_field = true;
+            } else if (bgColor == "Choose A Color") {
+                bg_color.style.border = "2px solid red";
+                blank_field = true;
+            } else {
+                text_color.style.border = "none";
+                bg_color.style.border = "none";
+            }
+
+            var message = document.getElementById("message");
+            if (blank_field == true) {
+                message.innerHTML = "<h4 style='color:red;'>Finish filling the blanks</h4>";
+            } else {
+                message.innerHTML = "";
+            }
+            add(name, textColor, bgColor, title, comment);
+        }
+
+        function add(arg1, arg2, arg3, arg4, arg5) {
+            var array = [];
+            var storage = { name: arg1.value, textColor: arg2, bgColor: arg3, title: arg4.value, comment: arg5.value };
+            array.push(storage);
+            show(array);
+        }
+
+        function show(argArray) {
+            var display = document.getElementById("display");
+            var post = "";
+
+            for (var i = 0; i < argArray.length; i++) {
+                post += "<strong> " + argArray[i].name + "</strong><br>";
+                post += "<span style='color:" + argArray[i].textColor + ";'>";
+                post += "<div id='usercomment'  style='background-color:" + argArray[i].bgColor + ";'>";
+                post += "<strong> " + argArray[i].title + "</strong><br>";
+                post += "<strong> " + argArray[i].comment + "</strong><br>";
+                post += "</span>";
+                post += "</div>";
+                display.innerHTML = post;
+            }
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+
+        </div>
+        <!-- end logo row -->
+
+        <div class="row">
+            <div class="col-xs-12" id="menu">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="https://stealthytaco.github.io/revenge-of-the-unicycle/custom%20game.html">Unicycle Game</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- end menu row -->
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8" id="comments">COMMENTS
+                <div id="display"></div>
+                <div class="col-xs-12 col-sm-4" id="form">
+                    <header id="header"> Leave a Comment</header>
+                    <div id="message"></div>
+                    <form class="form-inline">
+                        <label>Name: </label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                        <br>
+                        <label>Font: </label>
+                        <select id="text_color" class="form-control">
+                            <option value='Choose A Color'>Choose A Color</option>
+                            <option value='Black'> Black </option>
+                            <option value='Red'> Red </option>
+                        </select>
+                    </form>
+
+                    <form class="form-horizontal">
+                        <label>Title: </label>
+                        <input type="text" class="form-control" id="title" placeholder="Enter Comment Title">
+                        <label>Background Color: </label>
+                        <select id="bg_color" class="form-control">
+                            <option value='Choose A Color'>Choose A Color</option>
+                            <option value='Yellow'> Yellow </option>
+                            <option value='Purple'> Purple </option>
+                        </select>
+
+                    </form>
+
+                    <label>Comment: </label>
+                    <br>
+                    <textarea id="comment" class="form-control" rows="8"> </textarea>
+                    <br>
+                    <input class="btn btn-default" type="button" value="Submit Comment" onclick="validate()">
+
+                </div><!--end form id div-->
+             
+            </div>
+        
+        </div><!-- end comments row -->
+    
+    </div><!-- end container div -->
+
+</body>
+
+</html>
